@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="cal.css">
+    <title>weather</title>
+
+</head>
+<body>
+    <div id="main">
+        <div id="search">
+            <input id="input" type="text" placeholder="  Enter a city..."> 
+            <button id="btn" type="submit" class="btn btn-info">Search</button>
+        </div>
+        <h2 id="h2"></h2>
+        <p id="p" ></p>
+        
+        <div id="show">
+            
+            <div id="con" class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div  class="card-header">
+                    <h3 id="header"></h3>
+                </div>
+                <div class="card-body">
+                <h4 id = "temp"class="card-title"></h4>
+                <p id="info" class="card-text"></p>
+                <h4 id = "w"class="card-title"></h4>
+                <p id="winfo" class="card-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+
+    <script>
+        function fu(i)
+        { 
+            fetch('https://api.openweathermap.org/data/2.5/weather?q='+i+'&appid=eeb7255d1c97b1b071645bac4f4ba245')
+            .then(res => res.json())
+            .then(dat =>
+            {
+                console.log(dat);
+                var tem = dat.main.temp;
+                document.getElementById('h2').style.display = "none";
+                document.getElementById('p').style.display = "none";
+                document.getElementById('show').style.display = "block";
+                document.getElementById('header').innerText = dat.name;
+                document.getElementById('temp').innerText = "Temperature";
+                document.getElementById('info').innerText = (tem-273.15).toPrecision(3)+" c";
+                document.getElementById('w').innerText = "Weather";
+                document.getElementById('winfo').innerText = dat.weather[0].main;
+            })
+            .catch(err => 
+            {
+                
+                console.log(err);
+                document.getElementById('show').style.display = "none";
+                document.getElementById('h2').style.display = "block";
+                document.getElementById('p').style.display = "block";
+                document.getElementById('h2').innerText = "City Not Found !";
+                document.getElementById('p').innerText = "Try Again...";
+            });
+        }
+
+        document.getElementById('btn').addEventListener('click',function()
+        {
+            //location.reload();
+            var input = document.getElementById('input').value;
+            fu(input);
+            document.getElementById('input').value = "";
+        })
+        
+    </script>
+</body>
+</html>
