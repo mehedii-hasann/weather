@@ -1,0 +1,31 @@
+#search{
+    margin: 5% 35%;
+}
+#show{
+    margin: 5% 35%;
+    display: none;
+}
+body{
+    background-image: url(d.jpeg);
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+#h2{
+    color: aqua;
+    margin-left: 410px;  
+}
+#p{
+    color: aqua;
+    margin-left: 410px;  
+}
+#input{
+    height: 37px;
+    width: 250px;
+    border-style: dotted;
+    border-radius: 10px;
+}
+#btn{
+    border-radius: 15px;
+}
